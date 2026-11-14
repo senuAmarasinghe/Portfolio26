@@ -18,12 +18,15 @@ export const experience: Experience[] = [
   },
   {
     company: "SLIIT Software Engineering Student Community",
-    role: "Volunteer — Development & Editorial Teams",
+    role: "Assistant Secretary",
     employmentType: "Volunteer",
-    period: "Ongoing",
+    period: "2026 — Present",
     location: "Malabe, Sri Lanka",
-    summary: "Contributing to the student community's development work and content.",
-    achievements: ["Contributing to development and content-related activities"],
+    summary: "Helping run the student community after starting out as a volunteer.",
+    achievements: [
+      "Serving as Assistant Secretary on the community's executive committee",
+      "Previously volunteered on the development and editorial teams",
+    ],
     stack: [],
   },
 ];
