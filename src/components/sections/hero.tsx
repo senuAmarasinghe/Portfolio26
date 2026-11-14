@@ -6,6 +6,7 @@ import { LiveClock } from "@/components/effects/live-clock";
 import { PageCurl } from "@/components/effects/page-curl";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { Volume } from "@/components/ui/volume";
 import { profile } from "@/data/profile";
 
 export function Hero() {
@@ -20,7 +21,9 @@ export function Hero() {
       <Container className="flex flex-1 flex-col gap-10 pt-6 lg:pt-10">
         {/* Masthead meta row */}
         <div className="grid grid-cols-2 gap-4 border-y border-border py-3 md:grid-cols-4">
-          <Eyebrow>Portfolio — Vol. 26</Eyebrow>
+          <Eyebrow>
+            Portfolio — Vol. <Volume />
+          </Eyebrow>
           <Eyebrow className="text-right md:text-left">{profile.location}</Eyebrow>
           <Eyebrow className="hidden md:block">{profile.role}</Eyebrow>
           <div className="hidden items-center justify-end gap-3 md:flex">

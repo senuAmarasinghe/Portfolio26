@@ -7,6 +7,9 @@ import { projects } from "@/data/projects";
 
 import HomePage from "./page";
 
+// Async Server Components can't render in the test DOM; formatVolume has its own unit test.
+vi.mock("@/components/ui/volume", () => ({ Volume: () => "26" }));
+
 describe("HomePage", () => {
   it("renders the name as the only h1", () => {
     render(<HomePage />);
