@@ -78,6 +78,14 @@
     scroll-behavior: smooth;
     /* Keep anchored sections clear of the sticky header. */
     scroll-padding-top: 5rem;
+    /* Thin, quiet scrollbar that blends into the paper (standard CSS, no ::-webkit hacks). */
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklch, var(--foreground) 22%, transparent) transparent;
+  }
+
+  /* While the page is moving, the thumb turns crimson (set by <ScrollInk />). */
+  html[data-scrolling] {
+    scrollbar-color: var(--accent) transparent;
   }
 
   body {
