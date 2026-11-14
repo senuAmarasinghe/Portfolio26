@@ -6,7 +6,8 @@ import Lenis from "lenis";
 import { useEffect } from "react";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { easeOutExpo, setLenis } from "@/lib/smooth-scroll";
+import { easeOutExpo, GLIDE_SECONDS } from "@/lib/motion";
+import { setLenis } from "@/lib/smooth-scroll";
 
 /**
  * Premium smooth scrolling for mouse-wheel users (Lenis). Deliberately light:
@@ -27,7 +28,8 @@ export function SmoothScroll() {
       autoRaf: true,
       // Slightly snappier than the 0.1 default: refined glide, no floaty drift.
       lerp: 0.12,
-      anchors: { offset: -80, duration: 1.2, easing: easeOutExpo },
+      // Same duration and curve as the nav ink dot, so they move as one.
+      anchors: { offset: -80, duration: GLIDE_SECONDS, easing: easeOutExpo },
       stopInertiaOnNavigate: true,
     });
     setLenis(lenis);

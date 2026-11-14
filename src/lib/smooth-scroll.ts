@@ -14,8 +14,3 @@ export function setLenis(lenis: Lenis | null) {
 export function getLenis(): Lenis | null {
   return instance;
 }
-
-/** easeOutExpo — the same curve as the --ease-out-expo design token. */
-export function easeOutExpo(t: number): number {
-  return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
-}
