@@ -83,6 +83,11 @@
     scrollbar-color: color-mix(in oklch, var(--foreground) 22%, transparent) transparent;
   }
 
+  /* When Lenis smooth scrolling is active it does the easing; CSS smoothing would double it. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
   /* While the page is moving, the thumb turns crimson (set by <ScrollInk />). */
   html[data-scrolling] {
     scrollbar-color: var(--accent) transparent;

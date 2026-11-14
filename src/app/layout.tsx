@@ -3,6 +3,7 @@ import { Archivo, Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 
 import { InkDrops } from "@/components/effects/ink-drops";
 import { ScrollInk } from "@/components/effects/scroll-ink";
+import { SmoothScroll } from "@/components/effects/smooth-scroll";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteFooter />
         <InkDrops />
         <ScrollInk />
+        <SmoothScroll />
       </body>
     </html>
   );

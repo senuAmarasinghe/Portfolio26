@@ -1,5 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
+import { setLenis } from "@/lib/smooth-scroll";
+
 import { MobileMenu } from "./mobile-menu";
 
 const items = [
@@ -47,5 +49,20 @@ describe("MobileMenu", () => {
     fireEvent.click(toggle);
     fireEvent.click(screen.getByRole("link", { name: /work/i }));
     expect(dialog).toHaveAttribute("inert");
+  });
+
+  it("pauses smooth scrolling while open and resumes it on close", () => {
+    const lenis = { stop: vi.fn(), start: vi.fn() };
+    setLenis(lenis as unknown as Parameters<typeof setLenis>[0]);
+    try {
+      const { toggle } = setup();
+      fireEvent.click(toggle);
+      expect(lenis.stop).toHaveBeenCalledTimes(1);
+
+      fireEvent.keyDown(document, { key: "Escape" });
+      expect(lenis.start).toHaveBeenCalled();
+    } finally {
+      setLenis(null);
+    }
   });
 });

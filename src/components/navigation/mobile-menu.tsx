@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 
+import { getLenis } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 import type { NavItem, SocialLink } from "@/types";
 
@@ -30,7 +31,7 @@ function useIsClient() {
  * - the toggle reports its state (aria-expanded / aria-controls)
  * - focus moves into the menu on open and back to the toggle on close
  * - Escape closes it; the closed menu is `inert` (not focusable or clickable)
- * - page scrolling is locked while it's open
+ * - page scrolling (native and Lenis) is locked while it's open
  */
 export function MobileMenu({ items, email, socials = [], className }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
@@ -55,14 +56,23 @@ export function MobileMenu({ items, email, socials = [], className }: MobileMenu
     document.addEventListener("keydown", onKeyDown);
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    getLenis()?.stop(); // pause smooth scrolling too, if it's running
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
+      getLenis()?.start();
     };
   }, [open]);
 
   const close = () => setOpen(false);
+
+  // Restart smooth scrolling *before* the link is followed: React's handler runs
+  // before Lenis's anchor handler, so the page can glide to the chosen section.
+  const followLink = () => {
+    getLenis()?.start();
+    close();
+  };
 
   const overlay = (
     <div
@@ -102,7 +112,7 @@ export function MobileMenu({ items, email, socials = [], className }: MobileMenu
               <a
                 ref={i === 0 ? firstLinkRef : undefined}
                 href={item.href}
-                onClick={close}
+                onClick={followLink}
                 className="flex items-baseline gap-4"
               >
                 <span className="font-mono text-xs text-accent">
