@@ -69,6 +69,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Keep anchored sections clear of the sticky header. */
+    scroll-padding-top: 5rem;
   }
 
   body {

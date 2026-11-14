@@ -20,9 +20,9 @@ export function Hero() {
           <Eyebrow className="hidden text-right md:block">Scroll ↓</Eyebrow>
         </div>
 
-        {/* Cover: name + cut-out portrait sitting on the baseline rule */}
-        <div className="grid flex-1 items-end gap-8 lg:grid-cols-12">
-          <h1 id="hero-title" className="relative z-10 self-center lg:col-span-8">
+        {/* Cover: name on the left; cut-out portrait breaking out of an arch, standing on the baseline rule */}
+        <div className="grid flex-1 items-center gap-12 lg:grid-cols-12">
+          <h1 id="hero-title" className="lg:col-span-8">
             <span className="block font-display text-display font-semibold uppercase font-stretch-expanded">
               {firstName}
             </span>
@@ -31,19 +31,30 @@ export function Hero() {
             </span>
           </h1>
 
-          <div className="relative mx-auto w-full max-w-sm lg:col-span-4 lg:-ml-[15%] lg:max-w-none">
+          {/* -mb-10 cancels the container gap so the portrait stands exactly on the rule below. */}
+          <figure className="relative -mb-10 w-full max-w-[18rem] self-end justify-self-center lg:col-span-4 lg:w-[min(24rem,28vw,calc((100svh_-_16rem)*0.66))] lg:max-w-none lg:justify-self-end">
+            {/* The arch sits behind; the head and shoulders rise above it for a subtle depth effect. */}
+            <div
+              aria-hidden
+              className="absolute inset-x-[4%] bottom-0 h-[74%] rounded-t-full border border-b-0 border-border bg-surface"
+            />
             <Image
               src={portrait}
               alt={`Portrait of ${profile.name}`}
               priority
-              placeholder="blur"
-              sizes="(min-width: 1024px) 34vw, (min-width: 640px) 24rem, 90vw"
-              className="h-auto w-full"
+              sizes="(min-width: 1024px) 28vw, 18rem"
+              className="relative h-auto w-full"
             />
-          </div>
+            <figcaption className="absolute bottom-6 left-0 -translate-x-full rotate-180 pl-3 [writing-mode:vertical-rl]">
+              <Eyebrow>
+                <span className="text-accent">Fig. 01</span> — {firstName},{" "}
+                {profile.location.split(",")[0]}
+              </Eyebrow>
+            </figcaption>
+          </figure>
         </div>
 
-        <div className="-mt-10 grid gap-8 border-t border-border py-8 md:grid-cols-12">
+        <div className="grid gap-8 border-t border-border py-8 md:grid-cols-12">
           <p className="max-w-md text-lg leading-relaxed text-muted md:col-span-6">
             {profile.tagline}
           </p>

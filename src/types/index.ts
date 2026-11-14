@@ -18,6 +18,7 @@ export interface Profile {
   /** Longer About text — one string per paragraph. */
   about: string[];
   currentlyLearning: string[];
+  languages: string[];
   stats: { label: string; value: string }[];
 }
 

@@ -12,6 +12,7 @@ export const profile: Profile = {
     "Outside work I volunteer with the SLIIT Software Engineering Student Community on the development and editorial teams. I care about clean, maintainable code and I'm growing my skills in system design, cloud and DevOps.",
   ],
   currentlyLearning: ["System Design", "AWS Cloud", "Microservices", "DevOps"],
+  languages: ["English", "Sinhala"],
   stats: [
     { label: "Years coding", value: "3+" },
     { label: "Projects built", value: "15+" },
