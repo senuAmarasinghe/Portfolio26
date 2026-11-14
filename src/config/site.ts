@@ -1,20 +1,18 @@
-import type { NavItem, SocialLink } from "@/types";
+import { profile } from "@/data/profile";
+import type { NavItem } from "@/types";
 
 export const siteConfig = {
-  name: "Senuthi Amarasinghe",
-  title: "Senuthi Amarasinghe | Portfolio",
-  description: "Personal portfolio of Senuthi Amarasinghe — projects, experience and contact.",
+  name: profile.name,
+  title: `${profile.name} — ${profile.role}`,
+  description: profile.tagline,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en_US",
 } as const;
 
 export const navItems: NavItem[] = [
-  { label: "About", href: "/#about" },
-  { label: "Projects", href: "/#projects" },
-  { label: "Contact", href: "/#contact" },
-];
-
-export const socialLinks: SocialLink[] = [
-  // { label: "GitHub", href: "https://github.com/<username>" },
-  // { label: "LinkedIn", href: "https://www.linkedin.com/in/<username>" },
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Work", href: "#work" },
+  { label: "Education", href: "#education" },
+  { label: "Contact", href: "#contact" },
 ];

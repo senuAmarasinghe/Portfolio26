@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
+/* `dark:` utilities follow the data-theme attribute (set by the theme switcher later). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ------------------------------------------------------------------
+ * Design tokens — "Paper & Crimson"
+ * Light is the default. Dark is opt-in via data-theme="dark" (theme switcher).
+ * Raw values live here; components only ever use the semantic names.
+ * ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light — clean warm-neutral paper, red used sparingly */
+  --background: oklch(0.97 0.003 90); /* ≈ #f5f5f3 */
+  --surface: oklch(1 0 0); /* cards sit slightly brighter than the page */
+  --foreground: oklch(0.2 0.004 30);
+  --muted: oklch(0.5 0.006 30);
+  --border: oklch(0.2 0.004 30 / 0.1);
+  --accent: oklch(0.52 0.19 27); /* crimson — passes 4.5:1 on background */
+  --accent-foreground: oklch(0.99 0 0);
+  --grain-opacity: 0.03;
+  color-scheme: light;
 }
 
+:root[data-theme="dark"] {
+  /* Dark — soft graphite, not pure black */
+  --background: oklch(0.23 0.004 30);
+  --surface: oklch(0.27 0.005 30);
+  --foreground: oklch(0.95 0.003 90);
+  --muted: oklch(0.7 0.006 30);
+  --border: oklch(0.95 0.003 90 / 0.1);
+  --accent: oklch(0.66 0.17 27);
+  --accent-foreground: oklch(0.18 0.004 30);
+  --grain-opacity: 0.035;
+  color-scheme: dark;
+}
+
+/* Expose tokens to Tailwind: bg-background, text-muted, border-border, font-serif, ... */
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
+  --font-display: var(--font-archivo);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  /* Fluid editorial type scale */
+  --text-display: clamp(2.75rem, 8.5vw, 9rem);
+  --text-display--line-height: 0.92;
+  --text-display--letter-spacing: -0.03em;
+  --text-headline: clamp(2.25rem, 5vw, 4.5rem);
+  --text-headline--line-height: 1;
+  --text-headline--letter-spacing: -0.02em;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------
+ * Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  body {
+    @apply bg-background font-sans text-foreground;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-accent;
+  }
+
+  /* Matte film grain over the whole page. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }

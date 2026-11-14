@@ -2,6 +2,12 @@ import type { ComponentProps } from "react";
 
 import { cn } from "@/lib/utils";
 
+/** Page-width wrapper with generous, fluid side gutters. */
 export function Container({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("mx-auto w-full max-w-5xl px-6", className)} {...props} />;
+  return (
+    <div
+      className={cn("mx-auto w-full max-w-[90rem] px-5 sm:px-8 lg:px-12", className)}
+      {...props}
+    />
+  );
 }
