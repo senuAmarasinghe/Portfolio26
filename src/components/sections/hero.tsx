@@ -1,6 +1,9 @@
 import Image from "next/image";
 
 import portrait from "@/assets/images/senuthi-portrait.webp";
+import { CompassMark } from "@/components/effects/compass-mark";
+import { LiveClock } from "@/components/effects/live-clock";
+import { PageCurl } from "@/components/effects/page-curl";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { profile } from "@/data/profile";
@@ -10,14 +13,22 @@ export function Hero() {
   const lastName = rest.join(" ");
 
   return (
-    <section aria-labelledby="hero-title" className="flex min-h-[calc(100svh-4rem)] flex-col">
+    <section
+      aria-labelledby="hero-title"
+      className="relative flex min-h-[calc(100svh-4rem)] flex-col"
+    >
       <Container className="flex flex-1 flex-col gap-10 pt-6 lg:pt-10">
         {/* Masthead meta row */}
         <div className="grid grid-cols-2 gap-4 border-y border-border py-3 md:grid-cols-4">
           <Eyebrow>Portfolio — Vol. 26</Eyebrow>
           <Eyebrow className="text-right md:text-left">{profile.location}</Eyebrow>
           <Eyebrow className="hidden md:block">{profile.role}</Eyebrow>
-          <Eyebrow className="hidden text-right md:block">Scroll ↓</Eyebrow>
+          <div className="hidden items-center justify-end gap-3 md:flex">
+            <Eyebrow>
+              <LiveClock /> <span className="text-border">·</span> Scroll
+            </Eyebrow>
+            <CompassMark />
+          </div>
         </div>
 
         {/* Cover: name on the left; cut-out portrait breaking out of an arch, standing on the baseline rule */}
@@ -32,7 +43,7 @@ export function Hero() {
           </h1>
 
           {/* -mb-10 cancels the container gap so the portrait stands exactly on the rule below. */}
-          <figure className="relative -mb-10 w-full max-w-[18rem] self-end justify-self-center lg:col-span-4 lg:w-[min(24rem,28vw,calc((100svh_-_16rem)*0.66))] lg:max-w-none lg:justify-self-end">
+          <figure className="relative -mb-10 w-full max-w-[18rem] self-end justify-self-center lg:col-span-4 lg:w-[min(24rem,28vw,calc((100svh-16rem)*0.66))] lg:max-w-none lg:justify-self-end">
             {/* The arch sits behind; the head and shoulders rise above it for a subtle depth effect. */}
             <div
               aria-hidden
@@ -73,6 +84,9 @@ export function Hero() {
           </dl>
         </div>
       </Container>
+
+      {/* Magazine dog-ear: peels up near the corner; clicking turns to the next section. */}
+      <PageCurl href="#about" />
     </section>
   );
 }

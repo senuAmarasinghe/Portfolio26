@@ -44,6 +44,11 @@ describe("HomePage", () => {
     }
   });
 
+  it("has a page-curl link that turns to the About section", () => {
+    render(<HomePage />);
+    expect(screen.getByRole("link", { name: "Turn page" })).toHaveAttribute("href", "#about");
+  });
+
   it("links to the email address", () => {
     render(<HomePage />);
     const emailLink = screen.getByRole("link", { name: profile.email });
