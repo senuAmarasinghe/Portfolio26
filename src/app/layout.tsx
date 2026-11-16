@@ -6,6 +6,7 @@ import { ScrollInk } from "@/components/effects/scroll-ink";
 import { SmoothScroll } from "@/components/effects/smooth-scroll";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 import { siteConfig } from "@/config/site";
 
 import "./globals.css";
@@ -54,17 +55,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    // suppressHydrationWarning: next-themes sets data-theme on <html> before React
+    // hydrates (to avoid a flash), so that one attribute is expected to differ.
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
-        <InkDrops />
-        <ScrollInk />
-        <SmoothScroll />
+        <ThemeProvider>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+          <InkDrops />
+          <ScrollInk />
+          <SmoothScroll />
+        </ThemeProvider>
       </body>
     </html>
   );

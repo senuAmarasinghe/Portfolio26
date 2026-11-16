@@ -83,6 +83,13 @@
     scrollbar-color: color-mix(in oklch, var(--foreground) 22%, transparent) transparent;
   }
 
+  /* Theme switch: our ink-spread clip-path animation replaces the default crossfade. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
   /* When Lenis smooth scrolling is active it does the easing; CSS smoothing would double it. */
   html.lenis {
     scroll-behavior: auto;

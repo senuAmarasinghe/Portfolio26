@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
+import { useIsClient } from "@/hooks/use-is-client";
 import { getLenis } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 import type { NavItem, SocialLink } from "@/types";
@@ -12,16 +13,6 @@ interface MobileMenuProps {
   email?: string;
   socials?: SocialLink[];
   className?: string;
-}
-
-// true in the browser, false during server rendering (portals need document.body).
-const subscribeNoop = () => () => {};
-function useIsClient() {
-  return useSyncExternalStore(
-    subscribeNoop,
-    () => true,
-    () => false,
-  );
 }
 
 /**
