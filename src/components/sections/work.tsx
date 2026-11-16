@@ -1,15 +1,13 @@
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Section } from "@/components/ui/section";
 import { TagList } from "@/components/ui/tag-list";
-import { projects } from "@/data/projects";
+import type { Project } from "@/types";
 
 const linkClass =
   "underline-offset-4 transition-colors duration-300 hover:text-accent hover:underline";
 
-export function Work() {
-  // Featured projects first; otherwise keep the curated order (sort is stable).
-  const ordered = [...projects].sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
-
+/** Presentational: renders projects in the order given (see getProjects for ordering). */
+export function Work({ projects }: { projects: Project[] }) {
   return (
     <Section
       id="work"
@@ -22,7 +20,7 @@ export function Work() {
       }
     >
       <ol className="divide-y divide-border border-y border-border">
-        {ordered.map((project, i) => (
+        {projects.map((project, i) => (
           <li
             key={project.slug}
             className="grid gap-6 py-10 transition-colors duration-500 ease-out-expo hover:bg-surface lg:grid-cols-12 lg:px-6"

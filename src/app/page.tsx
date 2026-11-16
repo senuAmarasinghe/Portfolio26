@@ -4,7 +4,7 @@ import { Contact } from "@/components/sections/contact";
 import { Education } from "@/components/sections/education";
 import { Experience } from "@/components/sections/experience";
 import { Hero } from "@/components/sections/hero";
-import { Work } from "@/components/sections/work";
+import { WorkSection } from "@/components/sections/work-section";
 
 export default function HomePage() {
   return (
@@ -13,7 +13,7 @@ export default function HomePage() {
       <About />
       <Experience />
       <Community />
-      <Work />
+      <WorkSection />
       <Education />
       <Contact />
     </>

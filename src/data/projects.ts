@@ -3,9 +3,10 @@ import type { Project } from "@/types";
 const GITHUB = "https://github.com/senuAmarasinghe";
 
 /**
- * Hand-curated projects. Later this will be complemented by repos fetched
- * automatically from GitHub (tagged with the `portfolio` topic).
- * TODO: replace the generic GitHub profile links with each project's repo URL.
+ * Hand-curated projects, shown with richer copy than GitHub provides.
+ * Repos tagged `portfolio` on GitHub are added automatically (see lib/github.ts).
+ * Keep `links.repo` pointing at the real repository: if that repo is also tagged,
+ * this curated entry replaces the automatic one instead of showing it twice.
  */
 export const projects: Project[] = [
   {
@@ -17,7 +18,7 @@ export const projects: Project[] = [
     summary:
       "Patients book appointments online and get real-time queue updates, while doctors and staff manage schedules, track patient flow and view analytics.",
     stack: ["MongoDB", "Express", "React", "Node.js", "TypeScript", "Tailwind CSS", "Firebase"],
-    links: { repo: GITHUB },
+    links: { repo: `${GITHUB}/MediTrack` },
     featured: true,
   },
   {
@@ -29,7 +30,7 @@ export const projects: Project[] = [
     summary:
       "A mobile application connecting NGOs, donors, beneficiaries and volunteers as a solution for the Zero Hunger Sustainable Development Goal.",
     stack: ["React Native", "Expo", "Firebase", "Figma", "Jira"],
-    links: { repo: GITHUB },
+    links: { repo: `${GITHUB}/ZeroHunger` },
     featured: true,
   },
   {
@@ -41,7 +42,7 @@ export const projects: Project[] = [
     summary:
       "A web-based system replacing manual processes and an outdated stock management system. I also led integration management for the team.",
     stack: ["React", "TypeScript", "Spring Boot", "Java", "Tailwind CSS", "JWT"],
-    links: { repo: GITHUB },
+    links: { repo: `${GITHUB}/PrabathMotors` },
     featured: true,
   },
   {
@@ -53,7 +54,8 @@ export const projects: Project[] = [
     summary:
       "Track income, expenses and savings with budget management, data visualization, backup & restore and notifications.",
     stack: ["Kotlin", "XML", "Android Studio", "Figma"],
-    links: { repo: GITHUB },
+    // No public repo found; add `repo` here if you make it public.
+    links: {},
   },
   {
     slug: "pottery-studio",
@@ -63,7 +65,7 @@ export const projects: Project[] = [
     status: "Completed",
     summary: "Translated Figma designs into Android XML layouts for a pottery studio's mobile app.",
     stack: ["Kotlin", "XML", "Firebase", "Figma"],
-    links: { repo: GITHUB },
+    links: { repo: `${GITHUB}/Pottery_App` },
   },
   {
     slug: "online-banking",
@@ -73,7 +75,7 @@ export const projects: Project[] = [
     status: "Academic",
     summary: "A Java web application built on the MVC architecture to learn core Java concepts.",
     stack: ["Java", "MySQL", "Apache Tomcat", "HTML", "CSS"],
-    links: {},
+    links: { repo: `${GITHUB}/Online_Banking_Y2S1` },
   },
   {
     slug: "siyane-group",

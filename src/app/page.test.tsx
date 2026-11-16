@@ -7,8 +7,15 @@ import { projects } from "@/data/projects";
 
 import HomePage from "./page";
 
-// Async Server Components can't render in the test DOM; formatVolume has its own unit test.
+// Async Server Components can't render in the test DOM, so swap them for their
+// synchronous parts. The logic behind them has its own unit tests.
 vi.mock("@/components/ui/volume", () => ({ Volume: () => "26" }));
+vi.mock("@/components/sections/work-section", async () => {
+  const { Work } = await import("@/components/sections/work");
+  const { projects: curated } = await import("@/data/projects");
+  const { mergeProjects } = await import("@/lib/github");
+  return { WorkSection: () => <Work projects={mergeProjects(curated, [])} /> };
+});
 
 describe("HomePage", () => {
   it("renders the name as the only h1", () => {

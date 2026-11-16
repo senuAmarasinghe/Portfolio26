@@ -42,7 +42,8 @@ export interface Experience {
   stack: string[];
 }
 
-export type ProjectStatus = "Live" | "Production" | "Completed" | "In progress" | "Academic";
+export type ProjectStatus =
+  "Live" | "Production" | "Completed" | "In progress" | "Academic" | "Open source";
 
 export interface Project {
   slug: string;
