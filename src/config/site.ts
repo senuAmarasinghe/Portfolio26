@@ -3,7 +3,7 @@ import type { NavItem } from "@/types";
 
 export const siteConfig = {
   name: profile.name,
-  title: `${profile.name} — ${profile.role}`,
+  title: `${profile.name} - ${profile.role}`,
   description: profile.tagline,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en_US",

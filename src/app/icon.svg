@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Brand mark: the header's pull cord (ink line + crimson bead) on paper.
+       Colours match the design tokens in globals.css; follows browser light/dark mode. -->
+  <style>
+    .paper { fill: #f6f5f3; stroke: #2a2624; stroke-opacity: 0.14; }
+    .cord { stroke: #2a2624; }
+    .bead { fill: #be2323; }
+    @media (prefers-color-scheme: dark) {
+      .paper { fill: #1f1c1c; stroke: #f6f5f3; stroke-opacity: 0.16; }
+      .cord { stroke: #f6f5f3; }
+      .bead { fill: #e86156; }
+    }
+  </style>
+  <rect class="paper" x="1" y="1" width="62" height="62" rx="14" stroke-width="2" />
+  <line class="cord" x1="32" y1="2" x2="32" y2="36" stroke-width="5" stroke-linecap="round" />
+  <circle class="bead" cx="32" cy="43" r="10" />
+</svg>
