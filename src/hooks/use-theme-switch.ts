@@ -1,30 +1,22 @@
 "use client";
 
-import { useTheme } from "next-themes";
-
-import { useIsClient } from "@/hooks/use-is-client";
+import { useTheme } from "@/hooks/use-theme";
+import { applyTheme, readTheme } from "@/lib/theme";
 import { type Point, withInkSpread } from "@/lib/theme-transition";
 
 /**
- * Shared logic for every theme toggle design.
+ * Theme toggle logic: flips light/dark inside the ink-spread transition.
  * `isDark` is undefined until the browser knows the saved theme (avoids a
  * hydration mismatch); visuals should use CSS `dark:` variants instead.
  */
 export function useThemeSwitch() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const isClient = useIsClient();
+  const theme = useTheme();
 
   const toggle = (origin?: Point) => {
-    const root = document.documentElement;
-    const next = root.dataset.theme === "dark" ? "light" : "dark";
-    withInkSpread(() => {
-      // Apply to the DOM synchronously so the View Transition captures the new
-      // theme; next-themes then saves the choice.
-      root.dataset.theme = next;
-      root.style.colorScheme = next;
-      setTheme(next);
-    }, origin);
+    const next = readTheme() === "dark" ? "light" : "dark";
+    // Applied synchronously inside the transition, so the new snapshot shows the new theme.
+    withInkSpread(() => applyTheme(next), origin);
   };
 
-  return { isDark: isClient ? resolvedTheme === "dark" : undefined, toggle };
+  return { isDark: theme === null ? undefined : theme === "dark", toggle };
 }

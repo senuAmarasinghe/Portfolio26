@@ -1,14 +1,11 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 
-import { ThemeProvider } from "./theme-provider";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
+
 import { PullCordToggle } from "./pull-cord-toggle";
 
 function setup() {
-  render(
-    <ThemeProvider>
-      <PullCordToggle />
-    </ThemeProvider>,
-  );
+  render(<PullCordToggle />);
   return screen.getByRole("button", { name: "Dark theme" });
 }
 
@@ -17,12 +14,12 @@ const theme = () => document.documentElement.dataset.theme;
 describe("PullCordToggle", () => {
   beforeEach(() => {
     localStorage.clear();
-    document.documentElement.removeAttribute("data-theme");
+    // What the init script does on page load for a first-time visitor.
+    document.documentElement.dataset.theme = "light";
   });
 
   it("starts in the light theme", () => {
     const cord = setup();
-    expect(theme()).toBe("light");
     expect(cord).toHaveAttribute("aria-pressed", "false");
   });
 
@@ -32,7 +29,7 @@ describe("PullCordToggle", () => {
     await act(async () => fireEvent.click(cord));
     expect(theme()).toBe("dark");
     expect(cord).toHaveAttribute("aria-pressed", "true");
-    expect(localStorage.getItem("portfolio26-theme")).toBe("dark");
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark");
 
     await act(async () => fireEvent.click(cord));
     expect(theme()).toBe("light");
